@@ -1,0 +1,17 @@
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/controller/PasoController.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/controller/RequisitoController.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/ProcesoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/RequisitoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/TipoPasoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/controller/TipoRequisitoController.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/PasoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoDetalleFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/SolicitudFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoDetalleRequisitoAtestadoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoDetalleRequisitoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/ProcesoDetalleFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/PasoRequisitoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/TipoRequisitoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/controller/TipoPasoController.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/AbstractFacade.java
