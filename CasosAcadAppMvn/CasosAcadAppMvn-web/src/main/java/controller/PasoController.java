@@ -124,10 +124,10 @@ public class PasoController implements Serializable {
     }
 
     public void cambiarEstado() {
-        if(crud==true){
-            crud=false;
-        }else{
-            crud=true;
+        if (crud == true) {
+            crud = false;
+        } else {
+            crud = true;
         }
     }
 

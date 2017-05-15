@@ -12,49 +12,49 @@
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit resizable="false" size="50%" position="center">
-                    <h:panelGrid columns="1">
-                        <h:form id="panelTablaPrincipal">
-                            <p:dataTable var="tr" value="#{tipoRequisitoController.findAll()}" widgetVar="tpTable" rowKey="#{tr.idTipoRequisito}" rows="5" paginator="true">
-                                <f:facet name="header">
-                                    <p:outputPanel>
-                                        <h:outputText value="Tipo Requisito:" />
-                                        <p:inputText id="globalFilter" onkeyup="PF('tpTable').filter()" style="width:150px" placeholder="Enter keyword"/>
-                                    </p:outputPanel>
-                                </f:facet>
-                                <p:column filterBy="#{tr.idTipoRequisito}">
-                                    <f:facet name="header">Id</f:facet>
-                                    <h:outputText value="#{tr.idTipoRequisito}"></h:outputText>
-                                </p:column>
-                                <p:column filterBy="#{tr.nombre}">
-                                    <f:facet name="header">Name</f:facet>
-                                    <h:outputText value="#{tr.nombre}"></h:outputText>
-                                </p:column>
-                                <p:column filterBy="#{tr.activo}" filterMatchMode="contains">
-                                    <f:facet name="header">Activo</f:facet>
-                                    <p:selectBooleanCheckbox value="#{tr.activo}" disabled="true"/>
-                                </p:column>
-                                <p:column filterBy="#{tr.descripcion}">
-                                    <f:facet name="header">Descripcion</f:facet>
-                                    <h:outputText value="#{tr.descripcion}"></h:outputText>
-                                </p:column>
-                                <p:column style="width:32px;text-align: center">
-                                    <f:facet name="header"></f:facet>
-                                    <p:commandButton id="selec" icon="ui-icon-search" action="#{tipoRequisitoController.seleccionar(tr)}" actionListener="#{requisitoController.setT(tr)}" update=":editFrm :editarFrm">
-                                    </p:commandButton>
-                                </p:column>
-                            </p:dataTable>
+                <h:panelGrid columns="1">
+                    <h:form id="panelTablaPrincipal">
+                        <p:dataTable var="tr" value="#{tipoRequisitoController.findAll()}" widgetVar="tpTable" rowKey="#{tr.idTipoRequisito}" rows="5" paginator="true">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Tipo Requisito:" />
+                                    <p:inputText id="globalFilter" onkeyup="PF('tpTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column filterBy="#{tr.idTipoRequisito}">
+                                <f:facet name="header">Id</f:facet>
+                                <h:outputText value="#{tr.idTipoRequisito}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{tr.nombre}">
+                                <f:facet name="header">Name</f:facet>
+                                <h:outputText value="#{tr.nombre}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{tr.activo}" filterMatchMode="contains">
+                                <f:facet name="header">Activo</f:facet>
+                                <p:selectBooleanCheckbox value="#{tr.activo}" disabled="true"/>
+                            </p:column>
+                            <p:column filterBy="#{tr.descripcion}">
+                                <f:facet name="header">Descripcion</f:facet>
+                                <h:outputText value="#{tr.descripcion}"></h:outputText>
+                            </p:column>
+                            <p:column style="width:32px;text-align: center">
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton id="selec" icon="ui-icon-search" action="#{tipoRequisitoController.seleccionar(tr)}" actionListener="#{requisitoController.setT(tr)}" update=":editFrm :editarFrm">
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    <f:view>
+                        <h:form id="editFrm">
+                            <p:commandButton id="crud" actionListener="#{tipoRequisitoController.cambiarEstado()}" update=":editFrm" icon="ui-icon-refresh"> </p:commandButton>
+                            <om:frmTabla rendered="#{tipoRequisitoController.crud}" id="panelcrud" idTipo="#{tipoRequisitoController.tr.idTipoRequisito}" nombre="#{tipoRequisitoController.tr.nombre}" attActivo="#{tipoRequisitoController.tr.activo}" attDescripcion="#{tipoRequisitoController.tr.descripcion}"/>
+                            <p:panelGrid columns="2">
+                                <om:btnLimpiar rendered="#{tipoRequisitoController.crud}" id="btnLimpiar" limpiarBtn="#{tipoRequisitoController.limpiar}" renderizar=":editFrm"/>
+                                <om:btnsCrud rendered="#{tipoRequisitoController.crud}" id="btns" editando="#{tipoRequisitoController.editando}" addBtn="#{tipoRequisitoController.agregar}" editBtn="#{tipoRequisitoController.editar}" removeBtn="#{tipoRequisitoController.borrar}" renderizar=":editFrm :panelTablaPrincipal"/>
+                            </p:panelGrid>
                         </h:form>
-                        <f:view>
-                            <h:form id="editFrm">
-                                <p:commandButton id="crud" actionListener="#{tipoRequisitoController.cambiarEstado()}" update=":editFrm" icon="ui-icon-refresh"> </p:commandButton>
-                                <om:frmTabla rendered="#{tipoRequisitoController.crud}" id="panelcrud" idTipo="#{tipoRequisitoController.tr.idTipoRequisito}" nombre="#{tipoRequisitoController.tr.nombre}" attActivo="#{tipoRequisitoController.tr.activo}" attDescripcion="#{tipoRequisitoController.tr.descripcion}"/>
-                                <p:panelGrid columns="2">
-                                    <om:btnLimpiar rendered="#{tipoRequisitoController.crud}" id="btnLimpiar" limpiarBtn="#{tipoRequisitoController.limpiar}" renderizar=":editFrm"/>
-                                    <om:btnsCrud rendered="#{tipoRequisitoController.crud}" id="btns" editando="#{tipoRequisitoController.editando}" addBtn="#{tipoRequisitoController.agregar}" editBtn="#{tipoRequisitoController.editar}" removeBtn="#{tipoRequisitoController.borrar}" renderizar=":editFrm :panelTablaPrincipal"/>
-                                </p:panelGrid>
-                            </h:form>
-                        </f:view>
-                    </h:panelGrid>
+                    </f:view>
+                </h:panelGrid>
             </p:layoutUnit>
             <p:layoutUnit position="east" size="50%" resizable="false">
                 <h:panelGrid columns="1">

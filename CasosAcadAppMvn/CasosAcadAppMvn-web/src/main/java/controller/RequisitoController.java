@@ -128,10 +128,10 @@ public class RequisitoController implements Serializable {
     }
 
     public void cambiarEstado() {
-        if(crud==true){
-            crud=false;
-        }else{
-            crud=true;
+        if (crud == true) {
+            crud = false;
+        } else {
+            crud = true;
         }
     }
 
