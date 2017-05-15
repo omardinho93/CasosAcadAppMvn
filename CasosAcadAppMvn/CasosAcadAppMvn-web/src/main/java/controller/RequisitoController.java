@@ -10,6 +10,7 @@ import casos.acad.casosacaddatalibmvn.Requisito;
 import casos.acad.casosacaddatalibmvn.TipoRequisito;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -20,10 +21,21 @@ import javax.inject.Named;
 @Named(value = "requisitoController")
 @ViewScoped
 public class RequisitoController implements Serializable {
+
+    @EJB
     private RequisitoFacadeLocal rFacade;
     private boolean editando = false;
     private TipoRequisito t = new TipoRequisito();
     private Requisito r = new Requisito();
+    private boolean crud = false;
+
+    public boolean isCrud() {
+        return crud;
+    }
+
+    public void setCrud(boolean crud) {
+        this.crud = crud;
+    }
 
     public TipoRequisito getT() {
         return t;
@@ -34,7 +46,7 @@ public class RequisitoController implements Serializable {
     }
 
     public RequisitoFacadeLocal getPasoFacade() {
-        return rFacade;
+        return getrFacade();
     }
 
     public RequisitoFacadeLocal getrFacade() {
@@ -44,7 +56,6 @@ public class RequisitoController implements Serializable {
     public void setrFacade(RequisitoFacadeLocal rFacade) {
         this.rFacade = rFacade;
     }
-
 
     public boolean isEditando() {
         return editando;
@@ -66,53 +77,62 @@ public class RequisitoController implements Serializable {
     }
 
     public List<Requisito> findAlls() {
-        return this.rFacade.findAll();
+        return this.getrFacade().findAll();
     }
 
     public void limpiar() {
-        this.r = new Requisito();
-        this.t = new TipoRequisito();
-        this.editando = false;
+        this.setR(new Requisito());
+        this.setT(new TipoRequisito());
+        this.setEditando(false);
     }
 
     public void agregar() {
-        this.r.setIdTipoRequisito(this.t);
-        this.rFacade.crear(this.r);
-        this.r = new Requisito();
-        this.t = new TipoRequisito();
-        this.editando = false;
+        this.getR().setIdTipoRequisito(this.getT());
+        this.getrFacade().crear(this.getR());
+        this.setR(new Requisito());
+        this.setT(new TipoRequisito());
+        this.setEditando(false);
     }
 
     public String borrar() {
-        if (this.r.getIdTipoRequisito() != null) {
-            this.rFacade.remover(this.r);
-            this.r = new Requisito();
-            this.t = new TipoRequisito();
+        if (this.getR().getIdTipoRequisito() != null) {
+            this.getrFacade().remover(this.getR());
+            this.setR(new Requisito());
+            this.setT(new TipoRequisito());
         } else {
             System.out.println("no se puede eliminar si no hay seleccionado");
         }
-        this.editando = false;
+        this.setEditando(false);
         return "borrar";
 
     }
 
     public void seleccionar(Requisito p) {
-        this.r = p;
-        this.t = p.getIdTipoRequisito();
-        this.editando = true;
+        this.setR(p);
+        this.setT(p.getIdTipoRequisito());
+        this.setEditando(true);
+        this.setCrud(true);
     }
 
     public String editar() {
-        if (this.r.getIdTipoRequisito() != null) {
-            this.r.setIdTipoRequisito(this.t);
-            this.rFacade.editar(this.r);
-            this.r = new Requisito();
-            this.t = new TipoRequisito();
+        if (this.getR().getIdTipoRequisito() != null) {
+            this.getR().setIdTipoRequisito(this.getT());
+            this.getrFacade().editar(this.getR());
+            this.setR(new Requisito());
+            this.setT(new TipoRequisito());
         } else {
             System.out.println("no se puede eliminar si no hay seleccionado");
         }
-        this.editando = false;
+        this.setEditando(false);
         return "index";
+    }
+
+    public void cambiarEstado() {
+        if(crud==true){
+            crud=false;
+        }else{
+            crud=true;
+        }
     }
 
 }

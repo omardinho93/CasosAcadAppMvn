@@ -12,8 +12,6 @@ import javax.faces.view.ViewScoped;
 import java.util.List;
 import javax.ejb.EJB;
 import casos.acad.casosacaddatalibmvn.TipoPaso;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
@@ -28,7 +26,16 @@ public class TipoPasoController implements Serializable {
     @EJB
     private TipoPasoFacadeLocal tipoPasoFacade;
     private boolean editando = false;
+    private boolean crud = false;
 
+    public boolean isCrud() {
+        return crud;
+    }
+
+    public void setCrud(boolean crud) {
+        this.crud = crud;
+    }
+    
     public boolean isEditando() {
         return editando;
     }
@@ -85,6 +92,7 @@ public class TipoPasoController implements Serializable {
     public void seleccionar(TipoPaso tp) {
         this.tp = tp;
         this.editando = true;
+        this.crud = true;
     }
 
     public String editar() {
@@ -97,14 +105,12 @@ public class TipoPasoController implements Serializable {
         this.editando = false;
         return "index";
     }
-    public void onRowSelect(SelectEvent event) {
-        this.tp = (TipoPaso) event.getObject();
-        this.editando = true;
-    }
-    public void buttonAgregarAction(ActionEvent actionEvent) {
-        this.tipoPasoFacade.crear(this.tp);
-        this.tp = new TipoPaso();
-        this.editando = false;
-        
+    
+    public void cambiarEstado(){
+        if(crud==true){
+            crud=false;
+        }else{
+            crud=true;
+        }
     }
 }

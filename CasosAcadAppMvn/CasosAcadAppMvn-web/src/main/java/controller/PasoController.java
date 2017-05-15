@@ -27,6 +27,15 @@ public class PasoController implements Serializable {
     private boolean editando = false;
     private TipoPaso t = new TipoPaso();
     private Paso p = new Paso();
+    private boolean crud = false;
+
+    public boolean isCrud() {
+        return crud;
+    }
+
+    public void setCrud(boolean crud) {
+        this.crud = crud;
+    }
 
     public TipoPaso getT() {
         return t;
@@ -95,9 +104,10 @@ public class PasoController implements Serializable {
     }
 
     public void seleccionar(Paso p) {
-        this.p = p;
-        this.t = p.getIdTipoPaso();
-        this.editando = true;
+        this.setP(p);
+        this.setT(p.getIdTipoPaso());
+        this.setEditando(true);
+        this.setCrud(true);
     }
 
     public String editar() {
@@ -111,6 +121,14 @@ public class PasoController implements Serializable {
         }
         this.editando = false;
         return "index";
+    }
+
+    public void cambiarEstado() {
+        if(crud==true){
+            crud=false;
+        }else{
+            crud=true;
+        }
     }
 
 }

@@ -26,6 +26,16 @@ public class TipoRequisitoController implements Serializable {
 
     private TipoRequisito tr = new TipoRequisito();
     private boolean editando = false;
+    private boolean crud = false;
+
+    public boolean isCrud() {
+        return crud;
+    }
+
+    public void setCrud(boolean crud) {
+        this.crud = crud;
+    }
+    
 
     public boolean isEditando() {
         return editando;
@@ -71,6 +81,7 @@ public class TipoRequisitoController implements Serializable {
     public void seleccionar(TipoRequisito tr) {
         this.tr = tr;
         this.editando = true;
+        this.crud = true;
     }
 
     public String editar() {
@@ -87,6 +98,14 @@ public class TipoRequisitoController implements Serializable {
     public void limpiar() {
         this.tr = new TipoRequisito();
         this.editando = false;
+    }
+    
+    public void cambiarEstado(){
+        if(crud==true){
+            crud=false;
+        }else{
+            crud=true;
+        }
     }
 
 }

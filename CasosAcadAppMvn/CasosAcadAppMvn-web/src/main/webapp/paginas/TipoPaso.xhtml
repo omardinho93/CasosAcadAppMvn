@@ -9,15 +9,13 @@
         <title>Tipo Paso</title>
     </h:head>
     <h:body>
-        <p:layoutUnit position="north">
-            <h2 align="center">Tipo Paso</h2>
-            <a href="/CasosAcadAppMvn-web/index.jsf">Home</a>
-            <p:panelGrid columns="1">
+        <p:layout>
+            <p:layoutUnit position="center" size="50%" resizable="false">
                 <h:form  id="panelTablaPrincipal">
                     <p:dataTable id="tPasoTable" var="tp" widgetVar="tpTable" rowKey="#{tp.idTipoPaso}" value="#{tipoPasoController.findAll()}" rows="5" paginator="true">
                         <f:facet name="header">
                             <p:outputPanel>
-                                <h:outputText value="Search all fields:" />
+                                <h:outputText value="Tipo Paso:" />
                                 <p:inputText id="globalFilter" onkeyup="PF('tpTable').filter()" style="width:150px" placeholder="Enter keyword"/>
                             </p:outputPanel>
                         </f:facet>
@@ -37,82 +35,77 @@
                             <f:facet name="header">Descripcion</f:facet>
                             <h:outputText value="#{tp.descripcion}"></h:outputText>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">Opcion</f:facet>
-                            <p:commandButton id="selec" value="Seleccionar" actionListener="#{pasoController.setT(tp)}" action="#{tipoPasoController.seleccionar(tp)}" update=":tab:editFrm :tab:editarFrm">
+                        <p:column style="width:32px;text-align: center">
+                            <f:facet name="header"></f:facet>
+                            <p:commandButton id="selec" icon="ui-icon-search" actionListener="#{pasoController.setT(tp)}" action="#{tipoPasoController.seleccionar(tp)}" update=":editFrm :editarFrm">
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </h:form>
-                <p:tabView id="tab">
-                    <p:tab id="tabTP" title="CRUD Tipo Paso">
-                        <f:view>
-                            <h:form id="editFrm">
-                                <om:frmTabla id="panelcrud" idTipo="#{tipoPasoController.tp.idTipoPaso}" nombre="#{tipoPasoController.tp.nombre}" attActivo="#{tipoPasoController.tp.activo}" attDescripcion="#{tipoPasoController.tp.descripcion}"/>
-                                <p:panelGrid columns="2">
-                                    <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{tipoPasoController.limpiar}" renderizar=":tab:editFrm"/>
-                                    <om:btnsCrud id="btns" editando="#{tipoPasoController.editando}" addBtn="#{tipoPasoController.agregar}" editBtn="#{tipoPasoController.editar}" removeBtn="#{tipoPasoController.borrar}" renderizar=":tab:editFrm :panelTablaPrincipal"/>
-                                </p:panelGrid>
-                            </h:form>
-                        </f:view>
-                    </p:tab>
-                    <p:tab id="tabTabla" title="Tabla Paso">
-                        <h:form target=":tab:tabP" id="panelTablaDos">
-                            <p:dataTable id="tPasoTable" var="p" widgetVar="pTable" rowKey="#{p.idPaso}" value="#{pasoController.findAlls()}" rows="5" paginator="true">
-                                <f:facet name="header">
-                                    <p:outputPanel>
-                                        <h:outputText value="Search all fields:" />
-                                        <p:inputText id="globalFilter" onkeyup="PF('pTable').filter()" style="width:150px" placeholder="Enter keyword"/>
-                                    </p:outputPanel>
-                                </f:facet>
-                                <p:column filterBy="#{p.idPaso}">
-                                    <f:facet name="header">Id</f:facet>
-                                    <h:outputText value="#{p.idPaso}"></h:outputText>
-                                </p:column>
-                                <p:column filterBy="#{p.idTipoPaso.idTipoPaso}">
-                                    <f:facet name="header">IdTipoPaso</f:facet>
-                                    <h:outputText value="#{p.idTipoPaso.idTipoPaso}"></h:outputText>
-                                </p:column>
-                                <p:column filterBy="#{p.nombre}">
-                                    <f:facet name="header">Name</f:facet>
-                                    <h:outputText value="#{p.nombre}"></h:outputText>
-                                </p:column>
-                                <p:column filterBy="#{p.descripcion}">
-                                    <f:facet name="header">Descripcion</f:facet>
-                                    <h:outputText value="#{p.descripcion}"></h:outputText>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">Opcion</f:facet>
-                                    <p:commandButton id="select" value="Seleccionar" action="#{pasoController.seleccionar(p)}" update=":tab:editarFrm">
-                                    </p:commandButton>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
-                    </p:tab>
-                    <p:tab id="tabP" title="CRUD Paso">
-                        <f:view>
-                            <h:form target=":tab:tabTabla" id="editarFrm">
-                                <h2><h:outputText value="Fromulario para Crear/Editar"/></h2>
-                                <h:panelGrid columns="2" id="panelEdit">
-                                    <p:outputLabel value="Id:" for="id"/>
-                                    <p:inputText id="id" disabled="true" readonly="true" value="#{pasoController.p.idPaso}" title="Id" required="true"/>
-                                    <p:outputLabel value="IdTipoPaso:" for="idTipoPaso"/>
-                                    <p:inputText id="idTipoPaso" readonly="true" disabled="true" value="#{tipoPasoController.editando ? pasoController.t.idTipoPaso : pasoController.p.idTipoPaso.idTipoPaso}" title="IdTipoPaso" required="true"/>
-                                    <p:outputLabel value="Nombre:" for="nombre"/>
-                                    <p:inputText id="nombre" value="#{pasoController.p.nombre}" title="Nombre" required="false"/>
-                                    <p:outputLabel value="Descripcion:" for="descripcion"/>
-                                    <p:inputTextarea id="descripcion" value="#{pasoController.p.descripcion}" title="Descripcion" required="false"/>
-                                </h:panelGrid>
-                                <p:panelGrid columns="2">
-                                    <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{pasoController.limpiar}" renderizar=":tab:editarFrm"/>
-                                    <om:btnsCrud id="btns" editando="#{pasoController.editando}" addBtn="#{pasoController.agregar}" editBtn="#{pasoController.editar}" removeBtn="#{pasoController.borrar}" renderizar=":tab:editarFrm :tab:panelTablaDos"/>
-                                </p:panelGrid>
-                            </h:form>
-                        </f:view>
-                    </p:tab>
-                </p:tabView>
-            </p:panelGrid>
-        </p:layoutUnit>
+                <f:view>
+                    <h:form id="editFrm">
+                        <p:commandButton id="crudo" actionListener="#{tipoPasoController.cambiarEstado()}" update=":editFrm" icon="ui-icon-refresh"> </p:commandButton>
+                        <om:frmTabla rendered="#{tipoPasoController.crud}" id="panelcrud" idTipo="#{tipoPasoController.tp.idTipoPaso}" nombre="#{tipoPasoController.tp.nombre}" attActivo="#{tipoPasoController.tp.activo}" attDescripcion="#{tipoPasoController.tp.descripcion}"/>
+                        <p:panelGrid columns="2" rendered="#{tipoPasoController.crud}">
+                            <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{tipoPasoController.limpiar}" renderizar=":editFrm"/>
+                            <om:btnsCrud id="btns" editando="#{tipoPasoController.editando}" addBtn="#{tipoPasoController.agregar}" editBtn="#{tipoPasoController.editar}" removeBtn="#{tipoPasoController.borrar}" renderizar=":editFrm :panelTablaPrincipal"/>
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+            </p:layoutUnit>
+            <p:layoutUnit position="east" size="50%" resizable="false">
+                <h:form id="panelTablaDos">
+                    <p:dataTable id="tPasoTable" var="p" widgetVar="pTable" rowKey="#{p.idPaso}" value="#{pasoController.findAlls()}" rows="5" paginator="true">
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Paso:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('pTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                            </p:outputPanel>
+                        </f:facet>
+                        <p:column filterBy="#{p.idPaso}">
+                            <f:facet name="header">Id</f:facet>
+                            <h:outputText value="#{p.idPaso}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{p.idTipoPaso.idTipoPaso}">
+                            <f:facet name="header">IdTipoPaso</f:facet>
+                            <h:outputText value="#{p.idTipoPaso.idTipoPaso}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{p.nombre}">
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText value="#{p.nombre}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{p.descripcion}">
+                            <f:facet name="header">Descripcion</f:facet>
+                            <h:outputText value="#{p.descripcion}"></h:outputText>
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <f:facet name="header"></f:facet>
+                            <p:commandButton id="select" icon="ui-icon-search" action="#{pasoController.seleccionar(p)}" update=":editarFrm">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <f:view>
+                    <h:form id="editarFrm">
+                        <p:commandButton id="crudo" actionListener="#{pasoController.cambiarEstado()}" update=":editarFrm" icon="ui-icon-refresh"> </p:commandButton>
+                        <h:panelGrid columns="2" id="panelEdit" rendered="#{pasoController.crud}">
+                            <p:outputLabel value="Id:" for="id"/>
+                            <p:inputText id="id" disabled="true" readonly="true" value="#{pasoController.p.idPaso}" title="Id" required="true"/>
+                            <p:outputLabel value="IdTipoPaso:" for="idTipoPaso"/>
+                            <p:inputText id="idTipoPaso" readonly="true" disabled="true" value="#{tipoPasoController.editando ? pasoController.t.idTipoPaso : pasoController.p.idTipoPaso.idTipoPaso}" title="IdTipoPaso" required="true"/>
+                            <p:outputLabel value="Nombre:" for="nombre"/>
+                            <p:inputText id="nombre" value="#{pasoController.p.nombre}" title="Nombre" required="false"/>
+                            <p:outputLabel value="Descripcion:" for="descripcion"/>
+                            <p:inputTextarea id="descripcion" value="#{pasoController.p.descripcion}" title="Descripcion" required="false"/>
+                        </h:panelGrid>
+                        <p:panelGrid columns="2" rendered="#{pasoController.crud}">
+                            <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{pasoController.limpiar}" renderizar=":editarFrm"/>
+                            <om:btnsCrud id="btns" editando="#{pasoController.editando}" addBtn="#{pasoController.agregar}" editBtn="#{pasoController.editar}" removeBtn="#{pasoController.borrar}" renderizar=":editarFrm :panelTablaDos"/>
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+            </p:layoutUnit>
+        </p:layout>
     </h:body>
 </html>
 

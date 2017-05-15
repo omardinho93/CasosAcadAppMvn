@@ -98,26 +98,26 @@ public abstract class AbstractFacade<T> {
     }
 
     public List<T> findAll() {
-//        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-//        cq.select(cq.from(entityClass));
-//        return getEntityManager().createQuery(cq).getResultList();
-        List salida = null;
-        try {
-            EntityManager em = this.getEntityManager();
-            if (em != null) {
-                salida =  em.createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
-                if (salida != null) {
-                    return salida;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            if (salida == null) {
-                salida = new ArrayList();
-            }
-        }
-        return salida;
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityClass));
+        return getEntityManager().createQuery(cq).getResultList();
+//        List salida = null;
+//        try {
+//            EntityManager em = this.getEntityManager();
+//            if (em != null) {
+//                salida =  em.createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
+//                if (salida != null) {
+//                    return salida;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        } finally {
+//            if (salida == null) {
+//                salida = new ArrayList();
+//            }
+//        }
+//        return salida;
     }
 
 
