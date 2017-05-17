@@ -37,7 +37,7 @@
                         </p:column>
                         <p:column style="width:32px;text-align: center">
                             <f:facet name="header"></f:facet>
-                            <p:commandButton id="selec" icon="ui-icon-search" actionListener="#{pasoController.setT(tp)}" action="#{tipoPasoController.seleccionar(tp)}" update=":editFrm :editarFrm">
+                            <p:commandButton onclick="PF('dlg2').show();" id="selec" icon="ui-icon-search" actionListener="#{pasoController.setT(tp)}" action="#{tipoPasoController.seleccionar(tp)}" update=":editFrm :editarFrm">
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
@@ -52,6 +52,7 @@
                         </p:panelGrid>
                     </h:form>
                 </f:view>
+                
             </p:layoutUnit>
             <p:layoutUnit position="east" size="50%" resizable="false">
                 <h:form id="panelTablaDos">

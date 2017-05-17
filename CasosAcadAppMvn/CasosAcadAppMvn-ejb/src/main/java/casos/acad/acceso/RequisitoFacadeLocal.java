@@ -30,11 +30,11 @@ public interface RequisitoFacadeLocal {
 
     int count();
     
-    Requisito crear(Requisito tipoRequisito);
+    Requisito crear(Requisito Requisito);
     
-    Requisito editar(Requisito tipoRequisito);
+    Requisito editar(Requisito Requisito);
     
-    boolean remover(Requisito tipoRequisito);
+    boolean remover(Requisito Requisito);
     
     Requisito findById(Object id);    
 }

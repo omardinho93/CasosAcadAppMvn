@@ -30,4 +30,12 @@ public interface PasoRequisitoFacadeLocal {
 
     int count();
     
+    PasoRequisito crear(PasoRequisito PasoRequisito);
+    
+    PasoRequisito editar(PasoRequisito PasoRequisito);
+    
+    boolean remover(PasoRequisito PasoRequisito);
+    
+    PasoRequisito findById(Object id);  
+    
 }

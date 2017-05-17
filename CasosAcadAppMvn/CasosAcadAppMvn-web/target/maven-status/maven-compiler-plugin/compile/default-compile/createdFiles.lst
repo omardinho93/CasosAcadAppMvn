@@ -3,6 +3,7 @@ service/ProcesoDetalleFacadeREST.class
 service/CasoDetalleRequisitoFacadeREST.class
 controller/TipoPasoController.class
 controller/TipoRequisitoController.class
+controller/PasoRequisitoController.class
 service/PasoRequisitoFacadeREST.class
 service/CasoDetalleFacadeREST.class
 service/CasoDetalleRequisitoAtestadoFacadeREST.class

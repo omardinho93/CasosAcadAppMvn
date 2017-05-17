@@ -7,6 +7,7 @@
 /home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/PasoFacadeREST.java
 /home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoDetalleFacadeREST.java
 /home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/SolicitudFacadeREST.java
+/home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/controller/PasoRequisitoController.java
 /home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoDetalleRequisitoAtestadoFacadeREST.java
 /home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/CasoDetalleRequisitoFacadeREST.java
 /home/omar/Documentos/composeTPI/glassfish/CasosAcadMvn-Trabajo/CasosAcadAppMvn/CasosAcadAppMvn-web/src/main/java/service/ProcesoDetalleFacadeREST.java
