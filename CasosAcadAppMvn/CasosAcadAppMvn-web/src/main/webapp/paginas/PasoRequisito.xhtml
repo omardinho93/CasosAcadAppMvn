@@ -11,10 +11,67 @@ and open the template in the editor.
       xmlns:om="http://xmlns.jcp.org/jsf/composite/omarcp"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Paso Requisito</title>
     </h:head>
     <h:body>
-        <div>TODO write content</div>
+        <p:layout>
+            <p:layoutUnit position="center">
+                <h:form  id="panelTablaPrincipal">
+                    <p:dataTable id="tPRTable" var="tpr" widgetVar="tprTable" rowKey="#{tpr.idPasoRequisito}" value="#{pasoRequisitoController.findAlls()}" rows="5" paginator="true">
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Paso Requisito:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('tprTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                            </p:outputPanel>
+                        </f:facet>
+                        <p:column filterBy="#{tpr.idPasoRequisito}">
+                            <f:facet name="header">Id</f:facet>
+                            <h:outputText value="#{tpr.idPasoRequisito}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{tpr.idPaso.nombre}">
+                            <f:facet name="header">Paso</f:facet>
+                            <h:outputText value="#{tpr.idPaso.nombre}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{tpr.idRequisito.nombre}">
+                            <f:facet name="header">Requisito</f:facet>
+                            <h:outputText value="#{tpr.idRequisito.nombre}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{tpr.nombre}">
+                            <f:facet name="header">Nombre</f:facet>
+                            <h:outputText value="#{tpr.nombre}"></h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{tpr.descripcion}">
+                            <f:facet name="header">Descripcion</f:facet>
+                            <h:outputText value="#{tpr.descripcion}"></h:outputText>
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <f:facet name="header"></f:facet>
+                            <p:commandButton onclick="PF('dlg2').show();" id="selec" icon="ui-icon-search" actionListener="#{pasoRequisitoController.seleccionar(tpr)}" update=":editarFrm">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <f:view>
+                    <h:form id="editarFrm">
+                        <h:panelGrid columns="2" id="panelEdit">
+                            <p:outputLabel value="Id:" for="id"/>
+                            <p:inputText id="id" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idPasoRequisito}" title="Id" required="true"/>
+                            <p:outputLabel value="IdPaso:" for="idPaso"/>
+                            <p:inputText id="idPaso" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idPaso.idPaso}" title="IdPaso" required="true"/>
+                            <p:outputLabel value="IdRequisito:" for="idRequisito"/>
+                            <p:inputText id="idRequisito" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idRequisito.idRequisito}" title="IdRequisito" required="true"/>
+                            <p:outputLabel value="Nombre:" for="nombre"/>
+                            <p:inputText id="nombre" value="#{pasoRequisitoController.pr.nombre}" title="Nombre" required="false"/>
+                            <p:outputLabel value="Descripcion:" for="descripcion"/>
+                            <p:inputTextarea id="descripcion" value="#{pasoRequisitoController.pr.descripcion}" title="Descripcion" required="false"/>
+                        </h:panelGrid>
+                        <p:panelGrid columns="2">
+                            <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{pasoRequisitoController.limpiar}" renderizar=":editarFrm"/>
+                            <om:btnsCrud id="btns" editando="#{pasoRequisitoController.editando}" addBtn="#{pasoRequisitoController.agregar}" editBtn="#{pasoRequisitoController.editar}" removeBtn="#{pasoRequisitoController.borrar}" renderizar=":panelTablaPrincipal :editarFrm"/>
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+            </p:layoutUnit>
+        </p:layout>
     </h:body>
 </html>

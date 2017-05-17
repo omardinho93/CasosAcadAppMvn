@@ -21,8 +21,8 @@ import javax.inject.Named;
  */
 @Named(value = "pasoRequisitoController")
 @ViewScoped
-public class PasoRequisitoController implements Serializable{
-    
+public class PasoRequisitoController implements Serializable {
+
     @EJB
     private PasoRequisitoFacadeLocal prFacade;
     private boolean editando = false;
@@ -69,11 +69,11 @@ public class PasoRequisitoController implements Serializable{
     public void setEditando(boolean editando) {
         this.editando = editando;
     }
-    
+
     public List<PasoRequisito> findAlls() {
         return this.prFacade.findAll();
     }
-    
+
     public void limpiar() {
         this.pr = new PasoRequisito();
         this.p = new Paso();
@@ -85,22 +85,19 @@ public class PasoRequisitoController implements Serializable{
         this.pr.setIdPaso(this.p);
         this.pr.setIdRequisito(this.r);
         this.prFacade.crear(this.pr);
-        this.p = new Paso();
-        this.r = new Requisito();
+        this.limpiar();
         this.editando = false;
     }
 
     public String borrar() {
         if (this.pr.getIdPasoRequisito() != null) {
             this.prFacade.remover(this.pr);
-            this.p = new Paso();
-            this.r = new Requisito();
+            this.limpiar();
         } else {
             System.out.println("no se puede eliminar si no hay seleccionado");
         }
         this.editando = false;
         return "borrar";
-
     }
 
     public void seleccionar(PasoRequisito pr) {
@@ -112,16 +109,13 @@ public class PasoRequisitoController implements Serializable{
     }
 
     public String editar() {
-        if (this.pr.getIdPasoRequisito() != null) {
-            this.pr.setIdPaso(this.p);
-            this.pr.setIdRequisito(this.r);
-            this.prFacade.editar(this.pr);
-            this.p = new Paso();
-            this.r = new Requisito();
-        } else {
-            System.out.println("no se puede eliminar si no hay seleccionado");
-        }
+        this.pr.setIdPaso(this.p);
+        this.pr.setIdRequisito(this.r);
+        this.prFacade.editar(this.pr);
+        this.p = new Paso();
+        this.r = new Requisito();
         this.editando = false;
+        this.limpiar();
         return "index";
     }
 }

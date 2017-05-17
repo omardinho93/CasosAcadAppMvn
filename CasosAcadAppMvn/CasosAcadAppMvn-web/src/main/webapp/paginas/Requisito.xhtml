@@ -70,9 +70,9 @@
                                 <f:facet name="header">Id</f:facet>
                                 <h:outputText value="#{r.idRequisito}"></h:outputText>
                             </p:column>
-                            <p:column filterBy="#{r.idTipoRequisito.idTipoRequisito}">
+                            <p:column filterBy="#{r.idTipoRequisito.nombre}">
                                 <f:facet name="header">IdTipoRequisito</f:facet>
-                                <h:outputText value="#{r.idTipoRequisito.idTipoRequisito}"></h:outputText>
+                                <h:outputText value="#{r.idTipoRequisito.nombre}"></h:outputText>
                             </p:column>
                             <p:column filterBy="#{r.nombre}">
                                 <f:facet name="header">Name</f:facet>

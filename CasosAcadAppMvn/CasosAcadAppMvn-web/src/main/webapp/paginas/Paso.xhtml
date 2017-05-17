@@ -52,7 +52,6 @@
                         </p:panelGrid>
                     </h:form>
                 </f:view>
-                
             </p:layoutUnit>
             <p:layoutUnit position="east" size="50%" resizable="false">
                 <h:form id="panelTablaDos">
@@ -67,9 +66,9 @@
                             <f:facet name="header">Id</f:facet>
                             <h:outputText value="#{p.idPaso}"></h:outputText>
                         </p:column>
-                        <p:column filterBy="#{p.idTipoPaso.idTipoPaso}">
-                            <f:facet name="header">IdTipoPaso</f:facet>
-                            <h:outputText value="#{p.idTipoPaso.idTipoPaso}"></h:outputText>
+                        <p:column filterBy="#{p.idTipoPaso.nombre}">
+                            <f:facet name="header">TipoPaso</f:facet>
+                            <h:outputText value="#{p.idTipoPaso.nombre}"></h:outputText>
                         </p:column>
                         <p:column filterBy="#{p.nombre}">
                             <f:facet name="header">Name</f:facet>
