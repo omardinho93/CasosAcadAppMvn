@@ -46,31 +46,104 @@ and open the template in the editor.
                         </p:column>
                         <p:column style="width:32px;text-align: center">
                             <f:facet name="header"></f:facet>
-                            <p:commandButton onclick="PF('dlg2').show();" id="selec" icon="ui-icon-search" actionListener="#{pasoRequisitoController.seleccionar(tpr)}" update=":editarFrm">
+                            <p:commandButton id="selec" icon="ui-icon-search" actionListener="#{pasoRequisitoController.seleccionar(tpr)}" update=":editarFrm">
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </h:form>
-                <f:view>
-                    <h:form id="editarFrm">
-                        <h:panelGrid columns="2" id="panelEdit">
-                            <p:outputLabel value="Id:" for="id"/>
-                            <p:inputText id="id" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idPasoRequisito}" title="Id" required="true"/>
-                            <p:outputLabel value="IdPaso:" for="idPaso"/>
-                            <p:inputText id="idPaso" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idPaso.idPaso}" title="IdPaso" required="true"/>
-                            <p:outputLabel value="IdRequisito:" for="idRequisito"/>
-                            <p:inputText id="idRequisito" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idRequisito.idRequisito}" title="IdRequisito" required="true"/>
-                            <p:outputLabel value="Nombre:" for="nombre"/>
-                            <p:inputText id="nombre" value="#{pasoRequisitoController.pr.nombre}" title="Nombre" required="false"/>
-                            <p:outputLabel value="Descripcion:" for="descripcion"/>
-                            <p:inputTextarea id="descripcion" value="#{pasoRequisitoController.pr.descripcion}" title="Descripcion" required="false"/>
-                        </h:panelGrid>
-                        <p:panelGrid columns="2">
-                            <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{pasoRequisitoController.limpiar}" renderizar=":editarFrm"/>
-                            <om:btnsCrud id="btns" editando="#{pasoRequisitoController.editando}" addBtn="#{pasoRequisitoController.agregar}" editBtn="#{pasoRequisitoController.editar}" removeBtn="#{pasoRequisitoController.borrar}" renderizar=":panelTablaPrincipal :editarFrm"/>
-                        </p:panelGrid>
+                <p:panelGrid columns="2">
+                    <f:view>
+                        <h:form id="editarFrm">
+
+                            <p:panelGrid columns="2">
+                                <h:panelGrid columns="2" id="panelEdit">
+                                    <p:outputLabel value="Id:" for="id"/>
+                                    <p:inputText id="id" disabled="true" readonly="true" value="#{pasoRequisitoController.pr.idPasoRequisito}" title="Id" required="true"/>
+                                    <p:outputLabel value="IdPaso:" for="idPaso"/>
+                                    <p:inputText id="idPaso" disabled="true" readonly="true" value="#{pasoRequisitoController.editando ? pasoRequisitoController.pr.idPaso.idPaso : pasoRequisitoController.p.idPaso}" title="IdPaso" required="true"/>
+                                    <p:outputLabel value="IdRequisito:" for="idRequisito"/>
+                                    <p:inputText id="idRequisito" disabled="true" readonly="true" value="#{pasoRequisitoController.editando ? pasoRequisitoController.pr.idRequisito.idRequisito : pasoRequisitoController.r.idRequisito}" title="IdRequisito" required="true"/>
+                                    <p:outputLabel value="Nombre:" for="nombre"/>
+                                    <p:inputText id="nombre" value="#{pasoRequisitoController.pr.nombre}" title="Nombre" required="false"/>
+                                    <p:outputLabel value="Descripcion:" for="descripcion"/>
+                                    <p:inputTextarea id="descripcion" value="#{pasoRequisitoController.pr.descripcion}" title="Descripcion" required="false"/>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2">
+                                    <p:commandButton value="Paso" type="button" onclick="PF('dlg1').show();"/>
+                                    <p:commandButton value="Requisito" type="button" onclick="PF('dlg2').show();"/>
+                                </h:panelGrid>
+                            </p:panelGrid>
+                            <p:panelGrid columns="2">
+                                <om:btnLimpiar id="btnLimpiar" limpiarBtn="#{pasoRequisitoController.limpiar}" renderizar=":editarFrm"/>
+                                <om:btnsCrud id="btns" editando="#{pasoRequisitoController.editando}" addBtn="#{pasoRequisitoController.agregar}" editBtn="#{pasoRequisitoController.editar}" removeBtn="#{pasoRequisitoController.borrar}" renderizar=":editarFrm :panelTablaPrincipal"/>
+                            </p:panelGrid>
+                        </h:form>
+                    </f:view>
+                </p:panelGrid>
+                <p:dialog width="60%" closeOnEscape="true" header="Paso" widgetVar="dlg1" showEffect="fade" hideEffect="fade">
+                    <h:form id="panelTablaTres">
+                        <p:dataTable id="tPasoTable" var="p" widgetVar="pTable" rowKey="#{p.idPaso}" value="#{pasoController.findAlls()}" rows="5" paginator="true">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Paso:" />
+                                    <p:inputText id="globalFilter" onkeyup="PF('pTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column filterBy="#{p.idPaso}">
+                                <f:facet name="header">Id</f:facet>
+                                <h:outputText value="#{p.idPaso}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{p.idTipoPaso.nombre}">
+                                <f:facet name="header">TipoPaso</f:facet>
+                                <h:outputText value="#{p.idTipoPaso.nombre}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{p.nombre}">
+                                <f:facet name="header">Nombre</f:facet>
+                                <h:outputText value="#{p.nombre}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{p.descripcion}">
+                                <f:facet name="header">Descripcion</f:facet>
+                                <h:outputText value="#{p.descripcion}"></h:outputText>
+                            </p:column>
+                            <p:column style="width:32px;text-align: center">
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton id="selection" actionListener="#{pasoRequisitoController.setP(p)}" icon="ui-icon-search" update=":editarFrm"/>
+                            </p:column>
+                        </p:dataTable>
                     </h:form>
-                </f:view>
+                </p:dialog>
+                <p:dialog width="60%" closeOnEscape="true" header="Requisito" widgetVar="dlg2" showEffect="fade" hideEffect="fade">
+                    <h:form id="panelTablaDos">
+                        <p:dataTable id="tRequisitoTable" var="r" widgetVar="rTable" rowKey="#{r.idRequisito}" value="#{requisitoController.findAlls()}" rows="5" paginator="true">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Requisito:" />
+                                    <p:inputText id="globalFilter" onkeyup="PF('rTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column filterBy="#{r.idRequisito}">
+                                <f:facet name="header">Id</f:facet>
+                                <h:outputText value="#{r.idRequisito}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{r.idTipoRequisito.nombre}">
+                                <f:facet name="header">IdTipoRequisito</f:facet>
+                                <h:outputText value="#{r.idTipoRequisito.nombre}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{r.nombre}">
+                                <f:facet name="header">Name</f:facet>
+                                <h:outputText value="#{r.nombre}"></h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{r.descripcion}">
+                                <f:facet name="header">Descripcion</f:facet>
+                                <h:outputText value="#{r.descripcion}"></h:outputText>
+                            </p:column>
+                            <p:column style="width:32px;text-align: center">
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton id="select" actionListener="#{pasoRequisitoController.setR(r)}" icon="ui-icon-search" update=":editarFrm"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:dialog>
             </p:layoutUnit>
         </p:layout>
     </h:body>

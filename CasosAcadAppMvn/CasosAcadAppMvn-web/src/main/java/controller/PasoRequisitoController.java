@@ -26,9 +26,9 @@ public class PasoRequisitoController implements Serializable {
     @EJB
     private PasoRequisitoFacadeLocal prFacade;
     private boolean editando = false;
-    private Paso p;
-    private Requisito r;
-    private PasoRequisito pr;
+    private Paso p = new Paso();
+    private Requisito r = new Requisito();
+    private PasoRequisito pr = new PasoRequisito();
 
     public PasoRequisito getPr() {
         return pr;
@@ -82,11 +82,15 @@ public class PasoRequisitoController implements Serializable {
     }
 
     public void agregar() {
-        this.pr.setIdPaso(this.p);
-        this.pr.setIdRequisito(this.r);
-        this.prFacade.crear(this.pr);
-        this.limpiar();
-        this.editando = false;
+        try {
+                this.pr.setIdPaso(this.p);
+                this.pr.setIdRequisito(this.r);
+                this.prFacade.crear(this.pr);
+                this.limpiar();
+                this.editando = false;
+        } catch (Exception e) {
+
+        }
     }
 
     public String borrar() {
@@ -102,19 +106,15 @@ public class PasoRequisitoController implements Serializable {
 
     public void seleccionar(PasoRequisito pr) {
         this.setPr(pr);
-        this.setP(pr.getIdPaso());
-        this.setR(pr.getIdRequisito());
-        //this.setT(p.getIdTipoPaso());
+        this.pr.setIdPaso(pr.getIdPaso());
+        this.pr.setIdRequisito(pr.getIdRequisito());
         this.setEditando(true);
     }
 
     public String editar() {
-        this.pr.setIdPaso(this.p);
-        this.pr.setIdRequisito(this.r);
-        this.prFacade.editar(this.pr);
         this.p = new Paso();
         this.r = new Requisito();
-        this.editando = false;
+        this.prFacade.editar(this.pr);
         this.limpiar();
         return "index";
     }
